@@ -4,5 +4,6 @@ goated explanation here!
 <img width="1238" height="679" alt="image" src="https://github.com/user-attachments/assets/e1785cbe-f58e-4512-8b4f-2600284c6af0" />
 <img width="1238" height="679" alt="image" src="https://github.com/user-attachments/assets/4b9371f4-b2ae-4571-86df-2840f25da1d4" />
 
-![Uploading image.png…]()
+<img width="1274" height="641" alt="image" src="https://github.com/user-attachments/assets/62f4d6c1-3348-4a8e-9a27-5647710abc04" />
+
 
