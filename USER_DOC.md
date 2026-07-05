@@ -16,4 +16,4 @@ First push
 <img width="1271" height="621" alt="image" src="https://github.com/user-attachments/assets/a95c61a8-8cd2-48ed-b1c0-c2543e04f1ec" />
 <img width="1252" height="674" alt="image" src="https://github.com/user-attachments/assets/1c950908-fa7c-4874-bf72-0ecc712ace59" />
 <img width="1263" height="443" alt="image" src="https://github.com/user-attachments/assets/3aff35a7-3f0f-49a0-a480-5d808b7d92ca" />
-<img width="1270" height="755" alt="image" src="https://github.com/user-attachments/assets/34c83307-eea0-46c4-92fa-c8cb94aa413a" />
+<img width="1271" height="675" alt="image" src="https://github.com/user-attachments/assets/0e1c08da-901f-4527-812f-5fb2aed3a329" />
