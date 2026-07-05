@@ -11,3 +11,5 @@ goated explanation here!
 <img width="1257" height="684" alt="image" src="https://github.com/user-attachments/assets/3890ccf4-3da8-444e-8726-3d9250c4731c" />
 <img width="1257" height="684" alt="image" src="https://github.com/user-attachments/assets/1e7f8f8a-bc70-453a-97da-9461265ce5b5" />
 <img width="1270" height="681" alt="image" src="https://github.com/user-attachments/assets/aedc7273-214e-4699-905c-d8db12ea6cda" />
+First push 
+<img width="1271" height="621" alt="image" src="https://github.com/user-attachments/assets/a95c61a8-8cd2-48ed-b1c0-c2543e04f1ec" />
