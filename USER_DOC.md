@@ -1,5 +1,6 @@
 
-![alt text](image.png)
+<img width="1270" height="681" alt="image" src="https://github.com/user-attachments/assets/a7977917-a77f-4727-a949-bcc10bb51647" />
+
 goated explanation here!
 <img width="1238" height="679" alt="image" src="https://github.com/user-attachments/assets/e1785cbe-f58e-4512-8b4f-2600284c6af0" />
 <img width="1238" height="679" alt="image" src="https://github.com/user-attachments/assets/4b9371f4-b2ae-4571-86df-2840f25da1d4" />
