@@ -1,0 +1,103 @@
+name: inception
+
+services:
+  mariadb:
+    image: mariadb:inception
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    env_file: .env
+    secrets:
+      - db_root_password
+      - db_password
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "--socket=/run/mysqld/mysqld.sock", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
+
+  wordpress:
+    image: wordpress:inception
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    restart: unless-stopped
+    env_file: .env
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_user_password
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 2>/dev/null | grep -q pong"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  nginx:
+    image: nginx:inception
+    build:
+      context: ./requirements/nginx
+    container_name: nginx
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "443:443"
+    secrets:
+      - tls_certificate
+      - tls_private_key
+    volumes:
+      - wordpress_data:/var/www/html:ro
+    networks:
+      - inception
+    depends_on:
+      wordpress:
+        condition: service_healthy
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
+
+volumes:
+  mariadb_data:
+    name: inception_mariadb_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DATA_PATH}/mariadb
+  wordpress_data:
+    name: inception_wordpress_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DATA_PATH}/wordpress
+
+secrets:
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  db_password:
+    file: ../secrets/db_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ../secrets/wp_user_password.txt
+  tls_certificate:
+    file: ../secrets/tls.crt
+  tls_private_key:
+    file: ../secrets/tls.key

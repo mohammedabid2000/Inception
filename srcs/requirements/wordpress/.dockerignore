@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!conf/
+!conf/www.conf
+!tools/
+!tools/setup.sh

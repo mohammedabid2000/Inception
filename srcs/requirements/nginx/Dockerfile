@@ -1,7 +1,16 @@
-FROM debian:12
+FROM debian:12-slim
 
-RUN apt update && apt install nginx -y
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nginx gettext-base ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -f /etc/nginx/sites-enabled/default
 
-EXPOSE 80
+COPY conf/default.conf.template /etc/nginx/templates/default.conf.template
+COPY tools/setup.sh /usr/local/bin/nginx-entrypoint
 
+RUN chmod 755 /usr/local/bin/nginx-entrypoint
+
+EXPOSE 443
+
+ENTRYPOINT ["/usr/local/bin/nginx-entrypoint"]
 CMD ["nginx", "-g", "daemon off;"]
