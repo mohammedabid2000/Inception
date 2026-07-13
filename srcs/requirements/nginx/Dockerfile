@@ -1,7 +1,7 @@
 FROM debian:12-slim
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends nginx gettext-base ca-certificates \
+    && apt-get install -y --no-install-recommends nginx gettext-base openssl ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /etc/nginx/sites-enabled/default
 

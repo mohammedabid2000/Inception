@@ -3,12 +3,11 @@ set -eu
 
 ROOT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
 ENV_FILE="$ROOT_DIR/srcs/.env"
-EXAMPLE_ENV="$ROOT_DIR/srcs/.env.example"
 SECRETS_DIR="$ROOT_DIR/secrets"
 
 if [ ! -f "$ENV_FILE" ]; then
-    cp "$EXAMPLE_ENV" "$ENV_FILE"
-    printf 'Created %s; review it before starting the stack.\n' "$ENV_FILE"
+    echo "Missing $ENV_FILE; create it with the project configuration before running setup." >&2
+    exit 1
 fi
 
 # Export DATA_PATH and DOMAIN_NAME without executing arbitrary text from .env.
@@ -34,20 +33,7 @@ create_password() {
 
 create_password "$SECRETS_DIR/db_root_password.txt"
 create_password "$SECRETS_DIR/db_password.txt"
-create_password "$SECRETS_DIR/wp_admin_password.txt"
-create_password "$SECRETS_DIR/wp_user_password.txt"
-
-if [ ! -s "$SECRETS_DIR/tls.crt" ] || [ ! -s "$SECRETS_DIR/tls.key" ]; then
-    umask 077
-    openssl req -x509 -nodes -newkey rsa:2048 -sha256 -days 365 \
-        -keyout "$SECRETS_DIR/tls.key" \
-        -out "$SECRETS_DIR/tls.crt" \
-        -subj "/C=MA/O=42/CN=$DOMAIN_NAME" \
-        -addext "subjectAltName=DNS:$DOMAIN_NAME"
-    chmod 600 "$SECRETS_DIR/tls.key"
-    chmod 644 "$SECRETS_DIR/tls.crt"
-    printf 'Generated a self-signed TLS certificate for %s.\n' "$DOMAIN_NAME"
-fi
+create_password "$SECRETS_DIR/credentials.txt"
 
 printf '\nSetup complete. Add this hosts entry if it is missing:\n'
 printf '127.0.0.1 %s\n' "$DOMAIN_NAME"

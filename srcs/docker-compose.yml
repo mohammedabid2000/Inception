@@ -31,8 +31,7 @@ services:
     env_file: .env
     secrets:
       - db_password
-      - wp_admin_password
-      - wp_user_password
+      - credentials
     volumes:
       - wordpress_data:/var/www/html
     networks:
@@ -56,9 +55,6 @@ services:
     env_file: .env
     ports:
       - "443:443"
-    secrets:
-      - tls_certificate
-      - tls_private_key
     volumes:
       - wordpress_data:/var/www/html:ro
     networks:
@@ -93,11 +89,5 @@ secrets:
     file: ../secrets/db_root_password.txt
   db_password:
     file: ../secrets/db_password.txt
-  wp_admin_password:
-    file: ../secrets/wp_admin_password.txt
-  wp_user_password:
-    file: ../secrets/wp_user_password.txt
-  tls_certificate:
-    file: ../secrets/tls.crt
-  tls_private_key:
-    file: ../secrets/tls.key
+  credentials:
+    file: ../secrets/credentials.txt

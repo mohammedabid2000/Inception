@@ -1,8 +1,6 @@
 # Local configuration and credentials
 srcs/.env
 secrets/*
-!secrets/*.example
-!secrets/README.md
 
 # Local/editor files
 .DS_Store
